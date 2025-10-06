@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agenda do MEI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <span>Agenda do MEI</span>
+    <button id="theme-toggle" title="Alternar tema"></button>
+  </header>
+  <main>
+    <section id="calendar-container" aria-label="Calendário">
+      <div id="calendar-header">
+        <button id="prev-month" title="Mês anterior"></button>
+        <span id="month-year"></span>
+        <button id="next-month" title="Próximo mês"></button>
+      </div>
+      <div id="calendar" role="grid" aria-labelledby="month-year">
+        <!-- Days and dates will be generated here -->
+      </div>
+    </section>
+    <section id="appointments-container" aria-label="Lista de compromissos">
+      <h2>Compromissos</h2>
+      <input type="text" id="search-appointments" placeholder="Buscar compromissos..." aria-label="Buscar compromissos" />
+      <button id="btn-select">Selecionar</button>
+      <div id="bulk-actions" style="display: none; margin-top: 0.5rem;">
+        <button id="btn-edit-selected">Editar Selecionados</button>
+        <button id="btn-delete-selected">Excluir Selecionados</button>
+      </div>
+      <div id="appointments-list" role="list">
+        <!-- Appointment items will be listed here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for add/edit appointment -->
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal-content">
+      <h2 id="modal-title">Adicionar Compromisso</h2>
+      <form id="appointment-form">
+        <label for="title">Título</label>
+        <input type="text" id="title" name="title" required />
+
+        <label for="date">Data</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="time">Hora</label>
+        <input type="time" id="time" name="time" required />
+
+        <label for="description">Descrição</label>
+        <textarea id="description" name="description"></textarea>
+
+        <label for="type">Tipo</label>
+        <select id="type" name="type" required>
+          <option value="reuniao">Reunião</option>
+          <option value="pagamento">Pagamento</option>
+          <option value="entrega">Entrega</option>
+          <option value="outro">Outro</option>
+        </select>
+
+        <label for="reminder">Lembrete (minutos antes)</label>
+        <select id="reminder" name="reminder" required>
+          <option value="10">10 minutos</option>
+          <option value="60">1 hora</option>
+          <option value="1440">1 dia</option>
+        </select>
+
+        <div id="modal-buttons">
+          <button type="submit" id="btn-save">Salvar</button>
+          <button type="button" id="btn-cancel">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Custom delete confirmation modal -->
+  <div id="delete-modal" class="delete-modal">
+    <div class="delete-modal-content">
+      <p>Deseja mesmo remover o marcador?</p>
+      <div class="delete-modal-buttons">
+        <button id="delete-yes">Sim</button>
+        <button id="delete-no">Não</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
