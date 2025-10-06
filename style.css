@@ -1,0 +1,544 @@
+/* Basic reset and typography */
+:root {
+  --bg-color: #f9f9f9;
+  --text-color: #333;
+  --primary-color: #8e44ad;
+  --secondary-color: #e3f2fd;
+  --button-bg: #8e44ad;
+  --button-hover: #7d3c98;
+  --modal-bg: white;
+  --day-bg: #f0f4f8;
+  --inactive-bg: #e9ecef;
+  --appointment-future: #d0e8ff;
+  --appointment-today: #fff3cd;
+  --appointment-overdue: #e0e0e0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #bb86fc;
+  --secondary-color: #1e1e1e;
+  --button-bg: #bb86fc;
+  --button-hover: #9d4edd;
+  --modal-bg: #333;
+  --day-bg: #333;
+  --inactive-bg: #555;
+  --appointment-future: #2a2a2a;
+  --appointment-today: #3a3a3a;
+  --appointment-overdue: #2a2a2a;
+}
+
+/* Fade-in animation for page load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+header {
+  background-image: url('AdobeColorGradient Rosa Roxo.png');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+body.dark header {
+  background-image: url('AdobeColorGradient gradiente roxo.png');
+}
+#theme-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#theme-toggle::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('sol.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+body.dark #theme-toggle::before {
+  background-image: url('lua.png');
+}
+#theme-toggle:active {
+  transform: scale(0.95);
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  gap: 1rem;
+  justify-content: center;
+  animation: fadeIn 2s ease-out;
+}
+/* Calendar container */
+#calendar-container {
+  flex: 1 1 600px;
+  max-width: 900px;
+  background: var(--modal-bg);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  transition: background-color 0.3s, border-color 0.3s;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+body.dark #calendar-container {
+  border-color: #666;
+}
+/* Appointment list container */
+#appointments-container {
+  flex: 1 1 300px;
+  max-width: 350px;
+  background: var(--modal-bg);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s;
+}
+#appointments-container h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.25rem;
+}
+/* Search input */
+#search-appointments {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+/* Select button */
+#btn-select {
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+#btn-select:hover {
+  background-color: var(--button-hover);
+}
+#btn-select:active {
+  transform: scale(0.95);
+}
+/* Bulk actions */
+#bulk-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+#bulk-actions button {
+  width: 47.5%;
+}
+#bulk-actions button {
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 2.5rem;
+}
+#btn-edit-selected {
+  background-image: url('editar.png');
+}
+body.dark #btn-edit-selected {
+  background-image: url('editar (1).png');
+}
+#btn-delete-selected {
+  background-image: url('lixo.png');
+}
+#bulk-actions button:hover {
+  background-color: var(--button-hover);
+}
+#bulk-actions button:active {
+  transform: scale(0.95);
+}
+/* Appointment item */
+.appointment {
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.appointment.removing {
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 2s ease, opacity 2s ease;
+}
+.appointment.future {
+  background-color: var(--appointment-future);
+  color: #1a73e8;
+}
+.appointment.today {
+  background-color: var(--appointment-today);
+  color: #856404;
+}
+.appointment.overdue {
+  background-color: var(--appointment-overdue);
+  color: #6c757d;
+}
+.appointment .actions {
+  display: flex;
+  gap: 1rem;
+}
+.appointment .actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease;
+}
+.appointment .actions button:hover {
+  transform: scale(1.1);
+}
+.appointment .actions button:active {
+  transform: scale(0.95);
+}
+.appointment .actions .edit-btn {
+  background-image: url('editar.png');
+}
+body.dark .appointment .actions .edit-btn {
+  background-image: url('editar (1).png');
+}
+.appointment .actions .delete-btn {
+  background-image: url('lixo.png');
+}
+/* Calendar header */
+#calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#calendar-header button {
+  background-color: var(--button-bg);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+#calendar-header button:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.05);
+}
+#calendar-header button:active {
+  transform: scale(0.95);
+}
+#calendar-header button::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  margin-right: 0.5rem;
+}
+#prev-month::before {
+  border-width: 5px 8px 5px 0;
+  border-color: transparent white transparent transparent;
+}
+#next-month::before {
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent white;
+}
+#calendar-header span {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+/* Calendar grid */
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+.day-name, .day {
+  text-align: center;
+  padding: 0.5rem 0;
+  font-weight: bold;
+  border-radius: 4px;
+}
+.day-name {
+  background-color: var(--button-bg);
+  color: white;
+}
+.day {
+  background-color: var(--day-bg);
+  cursor: pointer;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0.25rem 0.5rem;
+  position: relative;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.day.holiday {
+  border-color: red !important;
+  font-weight: bold;
+  color: red;
+}
+
+body.dark .day {
+  border-color: #666;
+}
+.day.today {
+  background-color: var(--secondary-color);
+}
+.day.selected {
+  background-color: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+}
+.day.inactive {
+  color: #bbb;
+  background-color: var(--inactive-bg);
+  cursor: default;
+}
+.day .date-number {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.day .appointment-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: auto;
+}
+/* Modal styles */
+#modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#modal.active {
+  display: flex;
+}
+#modal-content {
+  background: var(--modal-bg);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s;
+}
+#modal.active #modal-content {
+  opacity: 1;
+  transform: scale(1);
+}
+#modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+#modal-content label {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: bold;
+}
+#modal-content input[type="text"],
+#modal-content input[type="date"],
+#modal-content input[type="time"],
+#modal-content select,
+#modal-content textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+#modal-content textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+#modal-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+#modal-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+#btn-save {
+  background-color: var(--button-bg);
+  color: white;
+}
+#btn-save:active {
+  transform: scale(0.95);
+}
+#btn-cancel {
+  background-color: #ccc;
+  color: #333;
+}
+#btn-cancel:active {
+  transform: scale(0.95);
+}
+/* Delete confirmation modal */
+.delete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 10001;
+}
+
+.delete-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--modal-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+  transition: background-color 0.3s;
+}
+
+.delete-modal-content p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.delete-modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.delete-modal-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#delete-yes {
+  background-color: #dc3545;
+  color: white;
+}
+
+#delete-yes:hover {
+  background-color: #c82333;
+}
+
+#delete-no {
+  background-color: #6c757d;
+  color: white;
+}
+
+#delete-no:hover {
+  background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  #calendar-container, #appointments-container {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+  #calendar {
+    display: block;
+  }
+  .day-name {
+    display: none;
+  }
+  .day {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: auto;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .day .date-number {
+    font-weight: normal;
+    margin: 0;
+  }
+  .day .appointment-dot {
+    display: none;
+  }
+}
