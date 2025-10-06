@@ -423,7 +423,12 @@ async function deleteAppointment(id) {
   }, 1000);
 }
 
-// Navigate months
+// Navigate months and years
+document.getElementById('prev-year').addEventListener('click', () => {
+  currentDate.setFullYear(currentDate.getFullYear() - 1);
+  renderMonthYear();
+  renderCalendar();
+});
 document.getElementById('prev-month').addEventListener('click', () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderMonthYear();
@@ -431,6 +436,11 @@ document.getElementById('prev-month').addEventListener('click', () => {
 });
 document.getElementById('next-month').addEventListener('click', () => {
   currentDate.setMonth(currentDate.getMonth() + 1);
+  renderMonthYear();
+  renderCalendar();
+});
+document.getElementById('next-year').addEventListener('click', () => {
+  currentDate.setFullYear(currentDate.getFullYear() + 1);
   renderMonthYear();
   renderCalendar();
 });

@@ -286,6 +286,10 @@ body.dark .appointment .actions .edit-btn {
   border-style: solid;
   margin-right: 0.5rem;
 }
+#prev-year::before {
+  content: '<<';
+  margin-right: 0.5rem;
+}
 #prev-month::before {
   border-width: 5px 8px 5px 0;
   border-color: transparent white transparent transparent;
@@ -293,6 +297,10 @@ body.dark .appointment .actions .edit-btn {
 #next-month::before {
   border-width: 5px 0 5px 8px;
   border-color: transparent transparent transparent white;
+}
+#next-year::before {
+  content: '>>';
+  margin-right: 0.5rem;
 }
 #calendar-header span {
   font-weight: bold;
