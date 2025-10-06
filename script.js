@@ -4,24 +4,26 @@ let appointments = [];
 // Current displayed month and year
 let currentDate = new Date();
 
-// Holiday data for 2025 with date, name, and type
+// Holiday data with month (0-based), day, name, and type
 const holidays = [
-  { data: "2025-01-01", nome: "Confraternização Universal", tipo: "Nacional" },
-  { data: "2025-04-18", nome: "Paixão de Cristo", tipo: "Nacional" },
-  { data: "2025-04-21", nome: "Tiradentes", tipo: "Nacional" },
-  { data: "2025-05-01", nome: "Dia do Trabalho", tipo: "Nacional" },
-  { data: "2025-09-07", nome: "Independência do Brasil", tipo: "Nacional" },
-  { data: "2025-09-20", nome: "Revolução Farroupilha", tipo: "Estadual (RS)" },
-  { data: "2025-10-12", nome: "Nossa Senhora Aparecida", tipo: "Nacional" },
-  { data: "2025-11-02", nome: "Finados", tipo: "Nacional" },
-  { data: "2025-11-15", nome: "Proclamação da República", tipo: "Nacional" },
-  { data: "2025-11-20", nome: "Dia da Consciência Negra", tipo: "Nacional" },
-  { data: "2025-12-25", nome: "Natal", tipo: "Nacional" }
+  { month: 0, day: 1, nome: "Confraternização Universal", tipo: "Nacional" },
+  { month: 3, day: 18, nome: "Paixão de Cristo", tipo: "Nacional" },
+  { month: 3, day: 21, nome: "Tiradentes", tipo: "Nacional" },
+  { month: 4, day: 1, nome: "Dia do Trabalho", tipo: "Nacional" },
+  { month: 8, day: 7, nome: "Independência do Brasil", tipo: "Nacional" },
+  { month: 8, day: 20, nome: "Revolução Farroupilha", tipo: "Estadual (RS)" },
+  { month: 9, day: 12, nome: "Nossa Senhora Aparecida", tipo: "Nacional" },
+  { month: 10, day: 2, nome: "Finados", tipo: "Nacional" },
+  { month: 10, day: 15, nome: "Proclamação da República", tipo: "Nacional" },
+  { month: 10, day: 20, nome: "Dia da Consciência Negra", tipo: "Nacional" },
+  { month: 11, day: 25, nome: "Natal", tipo: "Nacional" }
 ];
 
 // Function to check if a date is a holiday and return holiday info
-function getHolidayInfo(dateStr) {
-  return holidays.find(h => h.data === dateStr);
+function getHolidayInfo(date) {
+  const month = date.getMonth();
+  const day = date.getDate();
+  return holidays.find(h => h.month === month && h.day === day);
 }
 
 // Selected date for adding/editing appointments
@@ -119,7 +121,7 @@ function renderCalendar() {
   dayEl.appendChild(dateNumber);
 
   // Check if holiday
-  const holiday = getHolidayInfo(formatDate(dayDate));
+  const holiday = getHolidayInfo(dayDate);
   if (holiday) {
     dayEl.classList.add('holiday');
     const holidayLabel = document.createElement('div');

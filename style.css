@@ -265,11 +265,14 @@ body.dark .appointment .actions .edit-btn {
   background-color: var(--button-bg);
   border: none;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.6rem;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  min-width: 60px;
+  white-space: nowrap;
+  text-align: center;
 }
 #calendar-header button:hover {
   background-color: var(--button-hover);
@@ -278,30 +281,7 @@ body.dark .appointment .actions .edit-btn {
 #calendar-header button:active {
   transform: scale(0.95);
 }
-#calendar-header button::before {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  margin-right: 0.5rem;
-}
-#prev-year::before {
-  content: '<ano';
-  margin-right: 0.5rem;
-}
-#prev-month::before {
-  content: '<mês';
-  margin-right: 0.5rem;
-}
-#next-month::before {
-  content: 'mês>';
-  margin-right: 0.5rem;
-}
-#next-year::before {
-  content: 'ano>';
-  margin-right: 0.5rem;
-}
+
 #calendar-header span {
   font-weight: bold;
   font-size: 1.2rem;
@@ -527,6 +507,11 @@ body.dark .day {
   #calendar-container, #appointments-container {
     max-width: 100%;
     flex: 1 1 100%;
+  }
+  #calendar-header button {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.9rem;
+    min-width: 50px;
   }
   #calendar {
     display: block;
