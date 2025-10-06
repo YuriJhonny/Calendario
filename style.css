@@ -287,19 +287,19 @@ body.dark .appointment .actions .edit-btn {
   margin-right: 0.5rem;
 }
 #prev-year::before {
-  content: '<<';
+  content: '<ano';
   margin-right: 0.5rem;
 }
 #prev-month::before {
-  border-width: 5px 8px 5px 0;
-  border-color: transparent white transparent transparent;
+  content: '<mês';
+  margin-right: 0.5rem;
 }
 #next-month::before {
-  border-width: 5px 0 5px 8px;
-  border-color: transparent transparent transparent white;
+  content: 'mês>';
+  margin-right: 0.5rem;
 }
 #next-year::before {
-  content: '>>';
+  content: 'ano>';
   margin-right: 0.5rem;
 }
 #calendar-header span {
