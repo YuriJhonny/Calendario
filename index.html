@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Agenda do MEI</title>
+  <title>Calendario</title>
+  <link rel="icon" href="simbolo-de-interface-da-mola-e-quadrados-do-calendario.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <span>Agenda do MEI</span>
+    <span>Calendario</span>
     <button id="theme-toggle" title="Alternar tema"></button>
   </header>
   <main>
     <section id="calendar-container" aria-label="Calendário">
       <div id="calendar-header">
-        <button id="prev-year" title="Ano anterior"></button>
-        <button id="prev-month" title="Mês anterior"></button>
+        <button id="prev-year" title="Ano anterior">< ano</button>
+        <button id="prev-month" title="Mês anterior">< mês</button>
         <span id="month-year"></span>
-        <button id="next-month" title="Próximo mês"></button>
-        <button id="next-year" title="Próximo ano"></button>
+        <button id="next-month" title="Próximo mês">mês ></button>
+        <button id="next-year" title="Próximo ano">ano ></button>
       </div>
       <div id="calendar" role="grid" aria-labelledby="month-year">
         <!-- Days and dates will be generated here -->
